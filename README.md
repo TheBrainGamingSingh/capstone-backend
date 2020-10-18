@@ -1,14 +1,14 @@
 # capstone-backend
-Flask Backend for the Capstone Project
+## Flask Backend for the Capstone Project
 
-Team
+### Team
 
-Manpreet Singh Juneja
-Muskaan Bakshi
-Shrey Bhardwaj
-Priyanka Vaishya
-Ramesh Chandra
+#### Manpreet Singh Juneja
+#### Muskaan Bakshi
+#### Shrey Bhardwaj
+#### Priyanka Vaishya
+#### Ramesh Chandra
 
-Mentor
+### Mentor
 
-Prof. Mayank Gupta
+#### Prof. Mayank Gupta
