@@ -1,5 +1,5 @@
 from flask import Flask
-from flask_sqlalchemy import SQLAlchemy
+#from flask_sqlalchemy import SQLAlchemy
 from flask_restful import reqparse, abort, Api, Resource
 import pickle
 import json
@@ -55,7 +55,7 @@ api.add_resource(PredictClass, '/predict')
 
 # Users and authentication
 
-db = SQLAlchemy(app)
+#db = SQLAlchemy(app)
 
 
 if __name__ == '__main__':
