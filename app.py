@@ -1,4 +1,5 @@
 from flask import Flask
+from flask_sqlalchemy import SQLAlchemy
 from flask_restful import reqparse, abort, Api, Resource
 import pickle
 import json
@@ -45,12 +46,17 @@ class PredictClass(Resource):
         probs = model.predict_proba(user_query)[0]
 
         prediction = label_mapper[str(label)]
-        confidence = round(probs[label], 4) * 100
-        output = {'prediction': prediction, 'confidence': str(confidence) + ' %'}
+        confidence = int(probs[label] * 10000) / 10000
+        output = {'prediction': prediction, 'confidence': confidence}
 
         return output
 
 api.add_resource(PredictClass, '/predict')
+
+# Users and authentication
+
+db = SQLAlchemy(app)
+
 
 if __name__ == '__main__':
     app.run(debug=True)
