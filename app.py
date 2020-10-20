@@ -52,7 +52,7 @@ def home():
     return render_template("index.html", flask_token = "Capstone")
 
 class PredictClass(Resource):
-    def get(self):
+    def post(self):
         args = parser.parse_args()
         user_query = clean_and_stem(args['query'])
 
@@ -66,7 +66,7 @@ class PredictClass(Resource):
 
         return output
 
-api.add_resource(PredictClass, '/predict')
+api.add_resource(PredictClass, '/predict/')
 
 # Users and authentication
 
