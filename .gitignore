@@ -3,3 +3,4 @@ venv/*
 model/.ipynb_*
 model/*.pickle
 model/*.pkl
+!model/MultinomialNB.pkl
