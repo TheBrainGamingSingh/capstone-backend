@@ -66,7 +66,7 @@ class PredictClass(Resource):
 
         return output
 
-api.add_resource(PredictClass, '/predict/')
+api.add_resource(PredictClass, '/predict')
 
 # Users and authentication
 
@@ -74,4 +74,5 @@ db = SQLAlchemy(app)
 
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    port = 5000
+    app.run(debug=True, port=port)
