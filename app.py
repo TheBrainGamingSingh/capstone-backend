@@ -1,4 +1,12 @@
-from flask import Flask
+# > $env:FLASK_APP="app"
+# > flask run
+
+# > $env:FLASK_DEBUG=1
+
+# python -m venv venv
+# venv\Scripts\activate
+
+from flask import Flask, render_template
 from flask_sqlalchemy import SQLAlchemy
 from flask_restful import reqparse, abort, Api, Resource
 import pickle
@@ -30,14 +38,21 @@ def clean_and_stem(text):
     return [" ".join([stemmer.stem(i) for i in re.sub("[^a-zA-Z]", " ", x).split() if i not in words]).lower() for x in [text]]
 
 # Endpoints
-class ComplaintClassifier(Resource):
-    def get(self):
-        return {'Welcome!': 'This is a sample response of ComplaintClassifier.'}
+# class ComplaintClassifier(Resource):
+#     def get(self):
+#         return {'Welcome!': 'This is a sample response of ComplaintClassifier.'}
 
-api.add_resource(ComplaintClassifier, '/')
+# api.add_resource(ComplaintClassifier, '/')
+
+
+
+# added by Bhardwaj
+@app.route("/")
+def home():
+    return render_template("index.html", flask_token = "Capstone")
 
 class PredictClass(Resource):
-    def get(self):
+    def post(self):
         args = parser.parse_args()
         user_query = clean_and_stem(args['query'])
 
@@ -51,7 +66,7 @@ class PredictClass(Resource):
 
         return output
 
-api.add_resource(PredictClass, '/predict')
+api.add_resource(PredictClass, '/predict/')
 
 # Users and authentication
 
