@@ -60,7 +60,7 @@ class PredictClass(Resource):
         label = model.predict(user_query)[0]
         probs = model.predict_proba(user_query)[0]
 
-        labels = [label_mapper[str(i)] for i in sorted(range(len(probs)), key = lambda i: probs[i],reverse=True)][:3]
+        labels = [(label_mapper[str(i)], probs[i]) for i in sorted(range(len(probs)), key = lambda i: probs[i],reverse=True)][:3]
         prediction = label_mapper[str(label)]
         confidence = int(probs[label] * 10000) / 10000
 
