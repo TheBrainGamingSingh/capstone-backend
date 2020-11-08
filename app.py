@@ -26,7 +26,7 @@ api = Api(app)
 parser = reqparse.RequestParser()
 parser.add_argument('query')
 
-MODEL_PATH = './model/MultinomialNB.pkl'
+MODEL_PATH = './model/RBF_SVC.pkl'
 
 with open(MODEL_PATH, 'rb') as file:
     model = pickle.load(file)
