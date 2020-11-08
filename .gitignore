@@ -5,3 +5,4 @@ model/*.pickle
 model/*.pkl
 !model/MultinomialNB.pkl
 __pycache__
+data/*.xlsx
