@@ -70,11 +70,7 @@ class PredictClass(Resource):
         output = {'text_query' : text_query, 'prediction': prediction, 'confidence': confidence, 'labels' : labels}
         return output
 
-<<<<<<< HEAD
-api.add_resource(PredictClass, '/api/predict')
-=======
 api.add_resource(PredictClass, '/predict')
->>>>>>> f871bc826df9d077ae72eab0e702cbd3a246862d
 
 # Users and authentication
 
