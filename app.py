@@ -46,7 +46,7 @@ def clean_and_stem(text):
 
 
 
-added by Bhardwaj
+#added by Bhardwaj
 @app.route("/")
 def home():
     return render_template("index.html", flask_token = "Capstone")
@@ -66,7 +66,7 @@ class PredictClass(Resource):
 
         return output
 
-api.add_resource(PredictClass, '/api/predict/')
+api.add_resource(PredictClass, '/api/predict')
 
 # Users and authentication
 
