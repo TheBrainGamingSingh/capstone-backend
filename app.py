@@ -51,10 +51,12 @@ def clean_and_stem(text):
 def home():
     return render_template("index.html", flask_token = "Capstone")
 
+# TODO: Put this in a try except block to report errors
 class PredictClass(Resource):
     def post(self):
         args = parser.parse_args()
-        user_query = clean_and_stem(args['query'])
+        text_query = str(args['query'])
+        user_query = clean_and_stem(text_query)
 
 
         label = model.predict(user_query)[0]
@@ -65,7 +67,7 @@ class PredictClass(Resource):
         confidence = int(probs[label] * 10000) / 10000
 
         # return the prediction, confidence and top three labels
-        output = {'prediction': prediction, 'confidence': confidence, 'labels' : labels}
+        output = {'text_query' : text_query, 'prediction': prediction, 'confidence': confidence, 'labels' : labels}
         return output
 
 api.add_resource(PredictClass, '/predict')
