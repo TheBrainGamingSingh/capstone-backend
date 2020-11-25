@@ -3,4 +3,7 @@ venv/*
 model/.ipynb_*
 model/*.pickle
 model/*.pkl
-!model/MultinomialNB.pkl
+!model/RandomForest.pkl
+!model/RBF_SVC.pkl
+__pycache__
+data/*.xlsx

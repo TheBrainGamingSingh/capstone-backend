@@ -26,7 +26,7 @@ api = Api(app)
 parser = reqparse.RequestParser()
 parser.add_argument('query')
 
-MODEL_PATH = './model/MultinomialNB.pkl'
+MODEL_PATH = './model/RBF_SVC.pkl'
 
 with open(MODEL_PATH, 'rb') as file:
     model = pickle.load(file)
@@ -51,22 +51,30 @@ def clean_and_stem(text):
 def home():
     return render_template("index.html", flask_token = "Capstone")
 
+# TODO: Put this in a try except block to report errors
 class PredictClass(Resource):
     def post(self):
         args = parser.parse_args()
-        user_query = clean_and_stem(args['query'])
+        text_query = str(args['query'])
+        user_query = clean_and_stem(text_query)
 
 
         label = model.predict(user_query)[0]
         probs = model.predict_proba(user_query)[0]
 
+        labels = [(label_mapper[str(i)], probs[i]) for i in sorted(range(len(probs)), key = lambda i: probs[i],reverse=True)][:3]
         prediction = label_mapper[str(label)]
         confidence = int(probs[label] * 10000) / 10000
-        output = {'prediction': prediction, 'confidence': confidence}
 
+        # return the prediction, confidence and top three labels
+        output = {'text_query' : text_query, 'prediction': prediction, 'confidence': confidence, 'labels' : labels}
         return output
 
+<<<<<<< HEAD
 api.add_resource(PredictClass, '/api/predict')
+=======
+api.add_resource(PredictClass, '/predict')
+>>>>>>> f871bc826df9d077ae72eab0e702cbd3a246862d
 
 # Users and authentication
 
@@ -74,4 +82,5 @@ db = SQLAlchemy(app)
 
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    port = 5000
+    app.run(debug=True, port=port)
