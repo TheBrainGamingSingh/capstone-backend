@@ -62,15 +62,28 @@ class PredictClass(Resource):
         label = model.predict(user_query)[0]
         probs = model.predict_proba(user_query)[0]
 
-        labels = [(label_mapper[str(i)], probs[i]) for i in sorted(range(len(probs)), key = lambda i: probs[i],reverse=True)][:3]
+        labels = [(i, label_mapper[str(i)], probs[i]) for i in sorted(range(len(probs)), key = lambda i: probs[i],reverse=True)][:3]
+        labels_dict = []
+
+        for i in labels:
+            j = {}
+            j['id'] = i[0]
+            j['category'] = i[1]
+            j['confidence'] = i[2]
+
+            labels_dict.append(j)
+
         prediction = label_mapper[str(label)]
         confidence = int(probs[label] * 10000) / 10000
 
         # return the prediction, confidence and top three labels
-        output = {'text_query' : text_query, 'prediction': prediction, 'confidence': confidence, 'labels' : labels}
+        output = {'text_query' : text_query, 'prediction': prediction, 'confidence': confidence, 'labels' : labels_dict}
         return output
 
+
+# api.add_resource(PredictClass, '/api/predict')
 api.add_resource(PredictClass, '/predict')
+
 
 # Users and authentication
 
