@@ -55,7 +55,9 @@ def home():
 class PredictClass(Resource):
     def post(self):
         args = parser.parse_args()
+        print(args)
         text_query = str(args['query'])
+        print(text_query)
         user_query = clean_and_stem(text_query)
 
 
