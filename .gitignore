@@ -6,4 +6,5 @@ model/*.pkl
 !model/RandomForest.pkl
 !model/RBF_SVC.pkl
 __pycache__
+__pycache__/*
 data/*.xlsx

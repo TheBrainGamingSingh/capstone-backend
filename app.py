@@ -6,7 +6,7 @@
 # python -m venv venv
 # venv\Scripts\activate
 
-from flask import Flask, render_template
+from flask import Flask, render_template, url_for, make_response
 from flask_sqlalchemy import SQLAlchemy
 from flask_restful import reqparse, abort, Api, Resource
 import pickle
@@ -46,7 +46,7 @@ def clean_and_stem(text):
 
 
 
-# added by Bhardwaj
+#added by Bhardwaj
 @app.route("/")
 def home():
     return render_template("index.html", flask_token = "Capstone")
@@ -55,7 +55,9 @@ def home():
 class PredictClass(Resource):
     def post(self):
         args = parser.parse_args()
+        print(args)
         text_query = str(args['query'])
+        print(text_query)
         user_query = clean_and_stem(text_query)
 
 
